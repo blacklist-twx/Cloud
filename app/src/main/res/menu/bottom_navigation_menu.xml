@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <item android:id="@+id/fileFragment"
+        android:icon="@drawable/ic_baseline_cloud_circle_24"
+        android:title="我的网盘"
+        />
+
+    <item android:id="@+id/mate"
+        android:icon="@drawable/ic_baseline_people_24"
+        android:title="联系人"
+        />
+    <item android:id="@+id/photo"
+        android:icon="@drawable/ic_baseline_photo_24"
+        android:title="交际圈"
+        />
+
+    <item android:id="@+id/userFragment"
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:title="我"
+        />
+</menu>
