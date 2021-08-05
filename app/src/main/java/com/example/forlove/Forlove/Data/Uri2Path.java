@@ -12,6 +12,8 @@ import android.util.Log;
 
 import androidx.annotation.RequiresApi;
 
+import com.example.forlove.Constant.MyLog;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -21,6 +23,7 @@ import java.io.InputStream;
 public class Uri2Path {
     @RequiresApi(api = Build.VERSION_CODES.Q)
     public static String uriToFileApiQ(Context context, Uri uri) {
+        MyLog.i("uriToFileApiQ");
         File file = null;
         //android10以上转换
         if (uri.getScheme().equals(ContentResolver.SCHEME_FILE)) {
@@ -44,7 +47,7 @@ public class Uri2Path {
                 }
             }
         }
-        Log.d("uri2path",file.getAbsolutePath());
+        MyLog.i("path: "+file.getAbsolutePath());
         return file.getAbsolutePath();
     }
     public static String getFileFromContentUri(Context context, Uri uri) {

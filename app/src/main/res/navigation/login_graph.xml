@@ -6,7 +6,7 @@
     app:startDestination="@id/loginFragment">
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.forlove.Forlove.View.MyLoginFragment"
+        android:name="com.example.forlove.Forlove.View.Fragment.MyLoginFragment"
         android:label="login_fragment"
         tools:layout="@layout/fragment_login" >
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <activity
         android:id="@+id/mainActivity"
-        android:name="com.example.forlove.Forlove.View.MainActivity"
+        android:name="com.example.forlove.Forlove.View.Activity.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
 </navigation>

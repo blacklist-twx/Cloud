@@ -19,18 +19,18 @@
         android:theme="@style/Theme.Forlove">
         <service android:name=".Forlove.Data.ForegroundService"/>
         <activity
-            android:name=".Forlove.View.MainActivity"
+            android:name=".Forlove.View.Activity.MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
         <activity
-            android:name=".Forlove.View.LoadingActivity"
+            android:name=".Forlove.View.Activity.LoadingActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Forlove.View.LoginActivity">
+        <activity android:name=".Forlove.View.Activity.LoginActivity">
 
         </activity>
 

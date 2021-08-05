@@ -1,4 +1,4 @@
-package com.example.forlove.Forlove.View;
+package com.example.forlove.Forlove.View.Activity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.example.forlove.Forlove.View.Fragment.MyLoginFragment;
 import com.example.forlove.R;
 
 public class LoadingActivity extends AppCompatActivity {

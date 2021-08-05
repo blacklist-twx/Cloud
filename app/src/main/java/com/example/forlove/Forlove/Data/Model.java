@@ -1,16 +1,13 @@
 package com.example.forlove.Forlove.Data;
 
-import android.content.Context;
 import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.forlove.Constant.Constant;
 import com.example.forlove.Constant.MyLog;
 import com.example.forlove.Forlove.UploadResponse;
 import com.example.forlove.Forlove.ViewModel.LoginViewModel;
 import com.example.forlove.Forlove.ViewModel.MainViewModel;
-import com.example.forlove.data.Result;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -21,14 +18,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Consumer;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -68,13 +61,15 @@ public class Model {
      * 提前连接上服务器
      */
     public void init() {
+        MyLog.i("init...");
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://www.xiaowen520.xyz")
+                .baseUrl("http://1.116.217.171")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .build();
+        MyLog.i("init over");
     }
 
     public interface ApiService {
@@ -128,21 +123,13 @@ public class Model {
     }
 
     public void upload(String account, String path, UploadResponse api) throws IOException {
+        MyLog.i("upload");
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .create();
         File file = new File(path);
         RequestBody body = RequestBody.create(MediaType.parse("*/*"), file);
-//        OkHttpClient.Builder builder = new OkHttpClient.Builder()
-//                .connectTimeout(30, TimeUnit.SECONDS)
-//                .readTimeout(30, TimeUnit.SECONDS)
-//                .writeTimeout(30, TimeUnit.SECONDS);
-//        ProgressRequestBody body1 = new ProgressRequestBody(file,"*/*",api,body);
-//        retrofit=new Retrofit.Builder()
-//                .baseUrl("https://www.xiaowen520.xyz")
-//                .client(builder.build())
-//                .addConverterFactory(GsonConverterFactory.create(gson))
-//                .build();
+
         ApiService request = retrofit.create(ApiService.class);
 
 
@@ -154,16 +141,15 @@ public class Model {
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                Log.i("response", "上传成功");
+                MyLog.i("upload succeed");
                 api.succeed();
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Log.i("response", "上传失败" + t.getMessage());
-                Log.i("response", "上传失败原因" + t.getCause());
+                MyLog.e("upload fail: " + t.getMessage());
+                MyLog.e("upload fail: " + t.getCause());
                 t.printStackTrace();
-
                 api.failed();
             }
         });
@@ -171,42 +157,46 @@ public class Model {
 
 
     public void getUser(String account, LoginViewModel.getOrsetUser api) {
+        MyLog.i("getUser");
         ApiService request = retrofit.create(ApiService.class);
         Call<User> call = request.checkUser(account);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                MyLog.i("success result: "+response.body().getResult());
+                MyLog.i("get user success");
                 api.getuser(response.body());
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                MyLog.i("fail result: "+t.getMessage());
+                MyLog.e("get user fail: "+t.getMessage());
+                MyLog.e("get user fail: " + t.getCause());
                 api.NoInternet();
             }
         });
     }
 
     public void setUser(String account, String password, LoginViewModel.getOrsetUser api) {
+        MyLog.i("setUser");
         ApiService request = retrofit.create(ApiService.class);
         Map<String, String> user = new HashMap<>();
         user.put("account", account);
         user.put("password", password);
         JSONObject jsonObj = new JSONObject(user);
         RequestBody body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"), String.valueOf(jsonObj));
-        System.out.println(String.valueOf(jsonObj));
+
         Call<User> call = request.addUser(body);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
+                MyLog.i("setUser success");
                 api.setuser(response.body().getResult());
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                System.out.println("请求失败" + call.request());
-                System.out.println(t.getMessage());
+                MyLog.e("setUser fail: " + t.getMessage());
+                MyLog.e("setUser fail: " + t.getCause());
                 api.NoInternet();
             }
         });
@@ -217,12 +207,12 @@ public class Model {
 
         ApiService request = retrofit.create(ApiService.class);
         Call<Filedata> call = request.checkFile(account);
-        Log.i("thread", "get User On getUser:Current Thread: " + Thread.currentThread());
+
         call.enqueue(new Callback<Filedata>() {
             @Override
             public void onResponse(Call<Filedata> call, Response<Filedata> response) {
                 ArrayList arrayList = response.body().getFileList();
-                Log.i("filelist", "filelist: " + arrayList);
+                MyLog.i("success");
                 //System.out.println(arrayList.get(0).getClass());
                 api.setFileList(arrayList);
 
@@ -230,8 +220,8 @@ public class Model {
 
             @Override
             public void onFailure(Call<Filedata> call, Throwable t) {
-                System.out.println("请求失败" + call.request());
-                System.out.println(t.getMessage());
+                MyLog.e("getFileList fail: " + t.getMessage());
+                MyLog.e("getFileList fail: " + t.getCause());
             }
         });
     }

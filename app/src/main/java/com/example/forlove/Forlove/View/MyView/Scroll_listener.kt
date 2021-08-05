@@ -1,4 +1,4 @@
-package com.example.forlove.Forlove.View
+package com.example.forlove.Forlove.View.MyView
 
 import android.util.Log
 import androidx.recyclerview.widget.RecyclerView

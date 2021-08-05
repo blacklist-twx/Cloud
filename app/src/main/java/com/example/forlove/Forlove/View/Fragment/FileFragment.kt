@@ -1,7 +1,5 @@
-package com.example.forlove.Forlove.View
+package com.example.forlove.Forlove.View.Fragment
 
-import android.app.Activity.RESULT_OK
-import android.app.Notification
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -10,8 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
@@ -19,7 +15,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.forlove.Constant.MyLog
 import com.example.forlove.Forlove.Data.ForegroundService
+import com.example.forlove.Forlove.View.MyView.RecyclerAdapter
+import com.example.forlove.Forlove.View.MyView.Scroll_listener
 
 import com.example.forlove.Forlove.ViewModel.MainViewModel
 import com.example.forlove.R
@@ -35,10 +34,10 @@ class FileFragment : Fragment() {
             uri->
         run {
             if (uri!=null){
-                Log.d("uri",uri.toString())
+                MyLog.i("uri:"+ uri.toString())
                 viewmodel.upload(uri)
             }
-            else Log.d("uri","null")
+            else MyLog.i("uri: null")
 
         }
     }
@@ -56,25 +55,9 @@ class FileFragment : Fragment() {
     }
     @RequiresApi(Build.VERSION_CODES.Q)
     fun openAlbum() {
-//        val intent:Intent = Intent("android.intent.action.GET_CONTENT")
-//        intent.setType("*/*")
-//        intent.addCategory(Intent.CATEGORY_OPENABLE)
-//        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true)
-        //startActivityForResult(intent, 1004)
+
         launcher.launch("*/*")
     }
-
-//    @RequiresApi(Build.VERSION_CODES.Q)
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//        if(resultCode==RESULT_OK){
-//            Log.d("resultCode",resultCode.toString())
-//            Log.d("requestCode",requestCode.toString())
-//            when(requestCode){
-//                1004-> data?.let { viewmodel.handImage(it) }
-//            }
-//        }
-//    }
 
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -99,7 +82,7 @@ class FileFragment : Fragment() {
         val flushedobserver:Observer<Int> = object:Observer<Int>{
             override fun onChanged(t: Int?) {
                 Log.d("change","change:"+t.toString())
-                mrecycler.adapter=RecyclerAdapter(viewmodel.filelist)
+                mrecycler.adapter= RecyclerAdapter(viewmodel.filelist)
             }
         }
         val UploadResponse_observer:Observer<Int> = object:Observer<Int>{

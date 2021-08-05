@@ -1,4 +1,4 @@
-package com.example.forlove.Forlove.View;
+package com.example.forlove.Forlove.View.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 

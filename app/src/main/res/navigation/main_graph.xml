@@ -7,12 +7,12 @@
 
     <fragment
         android:id="@+id/userFragment"
-        android:name="com.example.forlove.Forlove.View.UserFragment"
+        android:name="com.example.forlove.Forlove.View.Fragment.UserFragment"
         android:label="fragment_user"
         tools:layout="@layout/fragment_user" />
     <fragment
         android:id="@+id/fileFragment"
-        android:name="com.example.forlove.Forlove.View.FileFragment"
+        android:name="com.example.forlove.Forlove.View.Fragment.FileFragment"
         android:label="fragment_file"
         tools:layout="@layout/fragment_file" />
 </navigation>

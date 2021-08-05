@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Forlove.View.UserFragment">
+    tools:context=".Forlove.View.Fragment.UserFragment">
 
-    <com.example.forlove.Forlove.View.RoundImageView
+    <com.example.forlove.Forlove.View.MyView.RoundImageView
         android:id="@+id/roundImageView"
         android:layout_width="130dp"
         android:layout_height="130dp"

@@ -1,4 +1,4 @@
-package com.example.forlove.Forlove.View;
+package com.example.forlove.Forlove.View.MyView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

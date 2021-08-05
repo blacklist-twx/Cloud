@@ -10,8 +10,10 @@ import android.os.IBinder
 import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
+import com.example.forlove.Constant.Common
+import com.example.forlove.Constant.MyLog
 import com.example.forlove.Forlove.UploadResponse
-import com.example.forlove.Forlove.View.MainActivity
+import com.example.forlove.Forlove.View.Activity.MainActivity
 import com.example.forlove.R
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
@@ -59,12 +61,12 @@ class ForegroundService: Service() {
 
     override fun onCreate() {
         super.onCreate()
-        Log.e(TAG, "onCreateService")
+        MyLog.i("onCreateService")
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        Log.e(TAG, "onStartService")
+        MyLog.i("onStartService")
         threadpool.execute(object:Runnable{
             override fun run() {
                 model.upload(intent?.getStringExtra("account"),intent?.getStringExtra("path"), object : UploadResponse {
@@ -75,15 +77,15 @@ class ForegroundService: Service() {
                     @RequiresApi(Build.VERSION_CODES.N)
                     @SuppressLint("WrongConstant")
                     override fun succeed() {
-                        Log.d("UploadResponse","succeed")
-                        model.uploadResponse.postValue(1)
+                        MyLog.i("succeed")
+                        model.uploadResponse.postValue(Common.UPLOADRESPONSE_SUCCESS)
                         //stopForeground(110)
                         stopSelf()
                         onDestroy()
                     }
                     override fun failed() {
-                        Log.d("UploadResponse","fail")
-                        model.uploadResponse.postValue(-1)
+                        MyLog.e("fail")
+                        model.uploadResponse.postValue(Common.UPLOADRESPONSE_FAIL)
                         stopSelf()
                         onDestroy()
                         //notification.postValue(-1)

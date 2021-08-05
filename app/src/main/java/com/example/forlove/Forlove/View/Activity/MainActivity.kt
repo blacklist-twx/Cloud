@@ -1,29 +1,22 @@
-package com.example.forlove.Forlove.View
+package com.example.forlove.Forlove.View.Activity
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import android.view.MenuItem
-import android.view.View
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.onNavDestinationSelected
 import com.example.forlove.Forlove.ViewModel.MainViewModel
 import com.example.forlove.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import java.security.Permission
+
 class MainActivity : AppCompatActivity() {
     lateinit var viewmodel:MainViewModel
     @RequiresApi(Build.VERSION_CODES.M)

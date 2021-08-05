@@ -1,4 +1,4 @@
-package com.example.forlove.Forlove.View
+package com.example.forlove.Forlove.View.MyView
 
 import android.view.LayoutInflater
 import android.view.View
@@ -29,7 +29,7 @@ class RecyclerAdapter(private val textList: ArrayList<String?>) :
 
     /**
      * function:Item的点击事件*/
-    override fun onBindViewHolder(holder: RecyclerAdapter.MyViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val textpos = textList[position]
         holder.title.text = textpos
         holder.itemView.setOnClickListener {
